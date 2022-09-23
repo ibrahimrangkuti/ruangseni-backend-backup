@@ -15,13 +15,13 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+            $table->foreignId('user_id')->nullable()->index('fk_post_to_user');
             $table->string('slug');
             $table->string('title');
             $table->longText('body');
             $table->enum('status', [0, 1, 2])->default(0);
             $table->enum('is_join_event', [0, 1]);
-            $table->integer('event_id')->nullable();
+            $table->foreignId('event_id')->nullable()->index('fk_post_to_event');
             $table->timestamps();
         });
     }
